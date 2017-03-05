@@ -11,13 +11,11 @@ use app\models\ShowByIdForm;
 
 class QueueController extends Controller
 {
-	public function actionIndex()
-    {
-    	echo 'index';
+	public function actionIndex(){
+    	return $this->redirect(Yii::$app->homeUrl);
     }
 
-    public function actionInfo()
-    {
+    public function actionInfo(){
     	$queue = preg_replace('/[^-a-zA-Z0-9_]/', '', Yii::$app->request->get('q'));
         $model = new QueuesModel();
         $pushForm = new PushForm();
@@ -54,16 +52,14 @@ class QueueController extends Controller
         ]);
     }
 
-    public function actionDelete()
-    {
+    public function actionDelete(){
     	$queue = preg_replace('/[^-a-zA-Z0-9_]/', '', Yii::$app->request->get('q'));
         $model = new QueuesModel();
         $model->deleteQueue($queue);
         return $this->redirect(Yii::$app->homeUrl);
     }
 
-    public function actionSample()
-    {
+    public function actionSample(){
 		$model = new QueuesModel();
 		$model->loadSampleData();
 		return $this->redirect(Yii::$app->homeUrl);
